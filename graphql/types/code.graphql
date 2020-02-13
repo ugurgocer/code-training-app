@@ -1,0 +1,9 @@
+#import Language from './unions.graphql'
+
+type Code {
+    code: String
+} 
+
+type Query {
+    code: Code
+}

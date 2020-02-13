@@ -1,0 +1,1 @@
+#import Mutation, Query from './types/auth.graphql'

@@ -1,0 +1,6 @@
+enum Language {
+    Python
+    Javascript
+    Html
+    PHP
+}

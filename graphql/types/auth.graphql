@@ -1,0 +1,29 @@
+#import Date, DateTime from './scalars.graphql'
+
+input Register {
+    fullName: String!
+    username: String!
+    email: String!
+    password: String!
+    isEducator: Boolean
+}
+
+input Login {
+    email: String!
+    password: String!
+}
+
+type Token {
+    token: String
+    date: DateTime
+    expiry_date: DateTime
+}
+
+type Mutation {
+    register(register: Register): Token
+    login(login: Login): Token
+}
+
+type Query {
+    tokenRead: Token
+}
