@@ -16,7 +16,7 @@ input Login {
 type Token {
     token: String
     date: DateTime
-    expiry_date: DateTime
+    expiryDate: DateTime
 }
 
 type Mutation {

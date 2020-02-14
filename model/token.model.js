@@ -19,7 +19,6 @@ Token.init({
     },
     expiryDate: {
         type: DataTypes.DATE,
-        defaultValue: new Date(),
         field: 'expiry_date',
     },
 }, {
