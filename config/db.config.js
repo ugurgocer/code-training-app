@@ -4,5 +4,6 @@ module.exports = {
     dialect: 'postgres',
     database: 'schoolproject',
     username: 'postgres',
-    password: 'kolay123'
+    password: 'kolay123',
+    logging: false
 }

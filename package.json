@@ -23,6 +23,7 @@
     "moment": "^2.24.0",
     "pg": "^7.18.1",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^5.21.4"
+    "sequelize": "^5.21.4",
+    "socket.io": "^2.3.0"
   }
 }

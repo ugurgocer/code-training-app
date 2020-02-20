@@ -3,6 +3,8 @@ class AuthError extends Error {
         super(message);
 
         this.name = "AuthError"
+        this.message = message
+        this.stack = ""
     }
 }
 

@@ -1,4 +1,5 @@
 #import Date, DateTime from './scalars.graphql'
+#import LoginType from './enums.graphql'
 
 input Register {
     fullName: String!
@@ -11,12 +12,14 @@ input Register {
 input Login {
     email: String!
     password: String!
+    loginType: LoginType!
 }
 
 type Token {
     token: String
     date: DateTime
     expiryDate: DateTime
+    loginType: LoginType
 }
 
 type Mutation {

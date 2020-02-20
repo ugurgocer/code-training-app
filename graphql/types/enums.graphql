@@ -4,3 +4,8 @@ enum Language {
     Html
     PHP
 }
+
+enum LoginType {
+    EDUCATOR
+    REGULAR
+}

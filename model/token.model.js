@@ -21,6 +21,14 @@ Token.init({
         type: DataTypes.DATE,
         field: 'expiry_date',
     },
+    loginType: {
+        type: DataTypes.STRING,
+        field: 'type',
+        allowNull: false,
+        validate: {
+            isIn:  [['regular', 'educator']]
+        }
+    }
 }, {
     modelName: 'tokens',
     sequelize

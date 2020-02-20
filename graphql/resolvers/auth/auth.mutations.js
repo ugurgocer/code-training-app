@@ -1,7 +1,8 @@
 const db = require('./../../../model/index')
 const moment = require('moment')
-const { AuthError } = require('./../../../utils/errors/index')
+const { AuthError, ValidationError } = require('./../../../utils/errors/index')
 const { Op } = require('sequelize')
+const { parseError } = require('./../../../utils/helpers/other')
 
 const register = async ( _, { register }, { req }, info) => {
     return db.sequelize.transaction(async trx => {
@@ -19,7 +20,16 @@ const register = async ( _, { register }, { req }, info) => {
             }
 
         }catch(err){
-            throw err
+            let errors = []
+            const customErr = parseError(err)
+
+            if(customErr)
+                if(customErr.type === 'validate')
+                    throw new ValidationError(customErr.errors)
+            else
+                errors = err
+
+            throw errors
         }
     })
 }
@@ -30,6 +40,9 @@ const login = async (_, { login }, { req }, info) => {
 
         if(!user)
             throw new AuthError("Bu e-posta ile kayıt olmuş bir kullanıcı yoktur.")
+        
+        if(login.loginType === 'educator' && !user.isEducator)
+            throw new AuthError("Bu bir eğitici hesabı değildir.")
 
         if(!user.validPassword(login.password))
             throw new AuthError("Girmiş olduğunuz parola yanlıştır.")
@@ -39,7 +52,8 @@ const login = async (_, { login }, { req }, info) => {
                 userId: user.id,
                 expiryDate: {
                     [Op.gte]: moment().toDate()
-                }
+                },
+                loginType: login.loginType
             },
             defaults: {
                 expiryDate: moment().add(1, 'month').toDate()
