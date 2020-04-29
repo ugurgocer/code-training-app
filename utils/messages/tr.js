@@ -1,7 +1,7 @@
 module.exports = {
     
     database: {
-       unique: (field, value) => `${value}` 
+       unique: (field, value) => `${field} alanı için ${value} değeri ile kaydedilmiş, başka bir değerle kayıt etmeyi deneyiniz.` 
     },
 
     fields: {

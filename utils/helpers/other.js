@@ -13,6 +13,15 @@ const parseError = (err, lang="tr") => {
             type: 'validate',
             errors
         }
+    }else if(err.name === 'SequelizeUniqueConstraintError'){
+        let error = {
+            field: /\(([^\(\)]+)\)\=/g.exec(err.original.detail)[1].trim(),
+        }
+
+        return {
+            type: 'unique',
+            error
+        }
     }
 }
 

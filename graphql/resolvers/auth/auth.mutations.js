@@ -1,6 +1,6 @@
 const db = require('./../../../model/index')
 const moment = require('moment')
-const { AuthError, ValidationError } = require('./../../../utils/errors/index')
+const { AuthError, ValidationError, UniqueError } = require('./../../../utils/errors/index')
 const { Op } = require('sequelize')
 const { parseError } = require('./../../../utils/helpers/other')
 
@@ -20,14 +20,14 @@ const register = async ( _, { register }, { req }, info) => {
             }
 
         }catch(err){
-            let errors = []
             const customErr = parseError(err)
-
-            if(customErr)
+            if(customErr){
                 if(customErr.type === 'validate')
                     throw new ValidationError(customErr.errors)
-            else
-                errors = err
+                else if(customErr.type === 'unique')
+                    throw new UniqueError({ ...customErr.error, value: register[customErr.error.field]})
+            }else
+                throw err
 
             throw errors
         }
