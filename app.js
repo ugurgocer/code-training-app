@@ -16,9 +16,10 @@ app.use(
         credentials: true
     })
 )
+
 app.use(loginMiddleware)
 app.use('/', route)
 graphql(app)
 
 const server = http.Server(app)
-server.listen(3000, () => console.log('3000 portunda başlatıldı.'))
+server.listen(5000, () => console.log('5000 portunda başlatıldı.'))

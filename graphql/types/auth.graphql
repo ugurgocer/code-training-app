@@ -23,8 +23,8 @@ type Token {
 }
 
 type Mutation {
-    register(register: Register): Token
-    login(login: Login): Token
+    register(register: Register!): Token
+    login(login: Login!): Token
 }
 
 type Query {
