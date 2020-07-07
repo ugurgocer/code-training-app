@@ -1,0 +1,41 @@
+#import DateTime from './scalars.graphql'
+
+type Query {
+    educatorList: EducatorList
+    educatorRead(id: Int!): Educator
+}
+
+type Mutation {
+    educatorCreate(educator: EducatorCreateInput!): Educator
+    educatorUpdate(id: Int!, educator: EducatorUpdateInput): Educator
+    educatorDelete(id: Int!): EducatorDeletePayload
+}
+
+type Educator {
+    name: String
+    username: String
+    description: String
+    profilePicture: String
+}
+
+type EducatorList {
+    educators: [Educator]
+}
+
+input EducatorCreateInput {
+    name: String!
+    username: String!
+    description: String
+    profilePicture: String
+}
+
+input EducatorUpdateInput {
+    name: String
+    username: String
+    description: String
+    profilePicture: String
+}
+
+type EducatorDeletePayload {
+    educator_id: Int
+}

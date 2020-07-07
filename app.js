@@ -1,6 +1,5 @@
 
 const express = require('express')
-const route = require('./route')
 const graphql = require('./graphql/apollo')
 const cors = require('cors')
 const loginMiddleware = require('./utils/middlewares/login.middleware')
@@ -17,8 +16,7 @@ app.use(
     })
 )
 app.use(loginMiddleware)
-app.use('/', route)
 graphql(app)
 
 const server = http.Server(app)
-server.listen(3000, () => console.log('3000 portunda başlatıldı.'))
+server.listen(5000, () => console.log('5000 portunda başlatıldı.'))

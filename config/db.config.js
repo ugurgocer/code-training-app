@@ -1,5 +1,5 @@
 module.exports = {
-    host: '127.0.0.1',
+    host: 'localhost',
     port: '5432',
     dialect: 'postgres',
     database: 'schoolproject',

@@ -13,14 +13,14 @@ module.exports = async ( req, res, next ) => {
             if(!result){
                 req.loginError = new AuthError('Token değeri doğru değildir.')
                 next()
+            }else{
+                const user = await db.User.findOne({ where: { id: result.userId }})
+                req.loginType = result.loginType
+                req.account = user.toJSON()
+                next()
             }
-            const user = await db.User.findOne({ where: { id: result.userId }})
-
-            req.loginType = result.loginType
-            req.account = user.toJSON()
         }
 
-        next()
     }catch(err){
         next()
     }
