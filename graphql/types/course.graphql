@@ -1,0 +1,52 @@
+#import SortingOperator from './generalUse.graphql'
+
+type Query {
+    courseList(filter: CourseFilterBase, sorting: CourseSorting): CourseList
+    courseRead (id: Int!): Course
+}
+
+type Mutation {
+    courseCreate(course: CourseCreateInput!): Course
+    courseUpdate(id: Int!, course: CourseUpdateInput): Course
+    courseDelete(id: Int!): CourseDeletePayload
+}
+
+type Course {
+    name: String
+    description: String
+}
+
+type CourseList {
+    courses: [Course]
+}
+
+input CourseCreateInput {
+    name: String!
+    description: String
+}
+
+input CourseUpdateInput {
+    name: String
+    description: String
+}
+
+type CourseDeletePayload {
+    course_id: Int
+}
+
+input CourseFilterBase {
+    AND: [CourseFilter]
+}
+
+input CourseFilter{
+    name: String
+}
+
+input CourseSorting {
+    field: CourseSortingField!
+    type: SortingOperator!
+}
+
+enum CourseSortingField{
+    name
+}

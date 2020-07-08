@@ -3,9 +3,9 @@ const { importSchema } = require('graphql-import')
 const resolvers = require('./resolver')
 const depthLimit = require('graphql-depth-limit')
 
-module.exports = async api => {
+module.exports = api => {
     const apollo = new ApolloServer({
-        typeDefs: await importSchema('./graphql/schema.graphql'),
+        typeDefs: importSchema('./graphql/schema.graphql'),
         validationRules: [depthLimit(6)],
         resolvers,
         introspection: true,
