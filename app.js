@@ -15,6 +15,7 @@ app.use(
         credentials: true
     })
 )
+
 app.use(loginMiddleware)
 graphql(app)
 

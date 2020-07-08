@@ -11,7 +11,8 @@ const register = async ( _, { register }, { req }, info) => {
 
             const token = await db.Token.create({
                 userId: user.id,
-                expiryDate: moment().add('1', 'Month')
+                expiryDate: moment().add('1', 'Month'),
+                loginType: register.isEducator ? 'educator' : 'regular'
             }, { transaction: trx })
 
             return {
@@ -20,6 +21,7 @@ const register = async ( _, { register }, { req }, info) => {
             }
 
         }catch(err){
+            console.log(err)
             const customErr = parseError(err)
             if(customErr){
                 if(customErr.type === 'validate')

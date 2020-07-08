@@ -15,12 +15,12 @@ module.exports = async ( req, res, next ) => {
                 next()
             }else{
                 const user = await db.User.findOne({ where: { id: result.userId }})
+                
                 req.loginType = result.loginType
                 req.account = user.toJSON()
                 next()
             }
         }
-
     }catch(err){
         next()
     }
