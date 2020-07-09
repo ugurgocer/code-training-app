@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('./../lib/db.constructor')
+const UserModel = require('./user.model')
 
 class Token extends Model {}
 
@@ -13,7 +14,7 @@ Token.init({
         type: DataTypes.INTEGER,
         field: 'user_id',
         references: {
-            model: 'users',
+            model: UserModel,
             key: 'id'
         }
     },

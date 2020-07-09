@@ -1,4 +1,5 @@
 #import DateTime from './scalars.graphql'
+#import Image, ImageInput from  './image.graphql'
 
 type Query {
     educatorList: EducatorList
@@ -12,10 +13,11 @@ type Mutation {
 }
 
 type Educator {
+    educatorId: Int
     name: String
     username: String
     description: String
-    profilePicture: String
+    profilePicture: Image
 }
 
 type EducatorList {
@@ -26,14 +28,14 @@ input EducatorCreateInput {
     name: String!
     username: String!
     description: String
-    profilePicture: String
+    profilePicture: ImageInput
 }
 
 input EducatorUpdateInput {
     name: String
     username: String
     description: String
-    profilePicture: String
+    profilePicture: ImageInput
 }
 
 type EducatorDeletePayload {

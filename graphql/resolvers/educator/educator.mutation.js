@@ -1,12 +1,26 @@
 const db = require('./../../../model/index')
 const { ValidationError } = require('./../../../utils/errors/index')
-const { parseError } = require('./../../../utils/helpers/other')
+const { parseError, imageUpload, loadFromDataLoader } = require('./../../../utils/helpers/other')
+const { regular } = require('./../../../utils/helpers/middleware')
+const { sequelize } = require('./../../../model/index')
 
-const educatorCreate = (_, { educator }, { req }, info) => {
+const educatorCreateBefore = (educator, req) => {
+    regular(req)
+
     return db.sequelize.transaction(async trx => {
         try{
-            const result = await db.Educator.create(educator, { transaction: trx })      
-            return result.toJSON()
+            let image_id = null
+            if(educator.profilePicture){
+                image_id = await imageUpload({userId: req.account.id, ...educator.profilePicture}, trx)
+                delete educator.profilePicture
+            }
+            
+            const result = await db.Educator.create({ ...educator, profilePicture: image_id, userId: req.account.id }, { transaction: trx })
+
+            return {
+                ...result.toJSON(),
+                educatorId: result.id
+            }
         }catch(err){
             const customErr = parseError(err)
             if(customErr){
@@ -14,10 +28,25 @@ const educatorCreate = (_, { educator }, { req }, info) => {
                     throw new ValidationError(customErr.errors)
             }else
                 throw err
-
-            throw errors
         }
     })
+}
+
+const educatorCreate = async (_, { educator }, { req, dataLoader }, info) => {
+    try{
+        const result = await educatorCreateBefore(educator, req)
+    
+        const profilePicture = await loadFromDataLoader(dataLoader.image, result.profilePicture)
+
+        return {
+            ...result,
+            profilePicture
+        }
+    }catch(err){
+        throw err
+    }
+
+
 }
 
 const educatorUpdate = async(_, { id, educator }, { req }, info) => {

@@ -1,12 +1,12 @@
 
-class EducatorError extends Error {
+class ImageUploadError extends Error {
     constructor(message){
         super(message);
 
-        this.name = "EducatorError"
+        this.name = "ImageUploadError"
         this.message = message
         this.stack = ""
     }
 }
 
-module.exports = EducatorError
+module.exports = ImageUploadError

@@ -15,7 +15,10 @@ const educatorList = async(_, { filter, sorting, paging }, { req }, info) => {
     regular(req)
     try {
         const results = await db.Educator.findAll()
-        return results
+        
+        return {
+            educators: results
+        }
     } catch (err) {
         throw err
     }

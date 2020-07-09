@@ -1,0 +1,26 @@
+input ImageInput {
+    response: String!
+    status: String!
+    uid: String!
+    url: String!
+}
+
+type Image {
+    imageId: Int
+    response: String
+    status: String
+    uid: String
+    url: String
+}
+
+type ImageDeletePayload {
+    fileId: Int
+}
+
+type Mutation {
+    deleteImage(imageId: Int!): ImageDeletePayload
+}
+
+type Query {
+    imageList: [Image]
+}

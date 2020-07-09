@@ -1,4 +1,6 @@
 const localize = require('../messages/index')
+const { ImageUploadError } = require('./../errors/index')
+const db = require('./../../model/index')
 
 const parseError = (err, lang="tr") => {
     if(err.name === 'SequelizeValidationError'){
@@ -25,7 +27,28 @@ const parseError = (err, lang="tr") => {
     }
 }
 
+const imageUpload = async (data, trx) => {
+    try{
+        const result = await db.ImageStorage.create(data, { transaction: trx })
+        return result.id
+    }catch(err){
+        throw new ImageUploadError(err.message)
+    }
+}
+
+const loadFromDataLoader = async (loader, keys ) => {
+    try{
+        const result = await loader.load(keys)
+
+        console.log(result)
+        return result
+    }catch(err){
+        throw new ImageUploadError(err.message)
+    }
+}
 
 module.exports = {
-    parseError
+    parseError,
+    imageUpload,
+    loadFromDataLoader
 }
