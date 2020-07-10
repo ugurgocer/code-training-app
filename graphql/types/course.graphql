@@ -1,4 +1,4 @@
-#import SortingOperator from './generalUse.graphql'
+#import SortingOperator, StringOperator from './generalUse.graphql'
 
 type Query {
     courseList(filter: CourseFilterBase, sorting: CourseSorting): CourseList
@@ -35,11 +35,13 @@ type CourseDeletePayload {
 }
 
 input CourseFilterBase {
-    AND: [CourseFilter]
+    and: [CourseFilter]
 }
 
 input CourseFilter{
-    name: String
+    name: StringOperator
+    or: [CourseFilter]
+    and: [CourseFilter]
 }
 
 input CourseSorting {

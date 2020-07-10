@@ -48,9 +48,11 @@ User.init({
     sequelize,
     hooks: {
         afterValidate: user => {
-            const salt = bcrypt.genSaltSync(8)
+            if(user.password){
+                const salt = bcrypt.genSaltSync(8)
 
-            user.password = bcrypt.hashSync(user.password, salt)
+                user.password = bcrypt.hashSync(user.password, salt)
+            }
         }
     }
 })

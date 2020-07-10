@@ -6,13 +6,11 @@ input Register {
     username: String!
     email: String!
     password: String!
-    isEducator: Boolean
 }
 
 input Login {
     email: String!
     password: String!
-    loginType: LoginType!
 }
 
 type Token {
@@ -25,6 +23,7 @@ type Token {
 type Mutation {
     register(register: Register!): Token
     login(login: Login!): Token
+    logout:Boolean
 }
 
 type Query {

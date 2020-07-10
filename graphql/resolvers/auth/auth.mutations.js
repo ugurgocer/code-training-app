@@ -1,6 +1,7 @@
 const db = require('./../../../model/index')
 const moment = require('moment')
-const { AuthError, ValidationError, UniqueError } = require('./../../../utils/errors/index')
+const { AuthError, ValidationError, UniqueError } = require('./../../../utils/errors')
+const { regular } = require('./../../../utils/helpers/middleware')
 const { Op } = require('sequelize')
 const { parseError } = require('./../../../utils/helpers/other')
 
@@ -12,7 +13,7 @@ const register = async ( _, { register }, { req }, info) => {
             const token = await db.Token.create({
                 userId: user.id,
                 expiryDate: moment().add('1', 'Month'),
-                loginType: register.isEducator ? 'educator' : 'regular'
+                loginType: 'regular'
             }, { transaction: trx })
 
             return {
@@ -21,7 +22,6 @@ const register = async ( _, { register }, { req }, info) => {
             }
 
         }catch(err){
-            console.log(err)
             const customErr = parseError(err)
             if(customErr){
                 if(customErr.type === 'validate')
@@ -42,9 +42,6 @@ const login = async (_, { login }, { req }, info) => {
 
         if(!user)
             throw new AuthError("Bu e-posta ile kayıt olmuş bir kullanıcı yoktur.")
-        
-        if(login.loginType === 'educator' && !user.isEducator)
-            throw new AuthError("Bu bir eğitici hesabı değildir.")
 
         if(!user.validPassword(login.password))
             throw new AuthError("Girmiş olduğunuz parola yanlıştır.")
@@ -55,7 +52,7 @@ const login = async (_, { login }, { req }, info) => {
                 expiryDate: {
                     [Op.gte]: moment().toDate()
                 },
-                loginType: login.loginType
+                loginType: user.isEducator ? 'educator' : 'regular'
             },
             defaults: {
                 expiryDate: moment().add(1, 'month').toDate()
@@ -71,7 +68,19 @@ const login = async (_, { login }, { req }, info) => {
     }
 }
 
+const logout = async (_, args, { req }, info) => {
+    regular(req)
+
+    try{
+        await db.Token.destroy({ where: { userId: req.account.id } })
+
+        return true
+    }catch(err){
+        throw err
+    }
+}
 module.exports = {
     register,
-    login
+    login,
+    logout
 }

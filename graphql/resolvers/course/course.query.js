@@ -1,8 +1,13 @@
 const db = require('./../../../model/index')
 const { regular } = require('./../../../utils/helpers/middleware')
+const { fillFilter } = require('./../../../utils/helpers/queryArgs')
 const Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;
+
+const fields = {
+    name: 'name'
+}
 
 const courseRead = async(_, { _id }, { req }, info) => {
     regular(req)
@@ -15,31 +20,22 @@ const courseRead = async(_, { _id }, { req }, info) => {
 }
 
 const courseList = async(_, { filter, sorting, paging }, { req }, info) => {
-    //regular(req)
+    regular(req)
     try {
-        let results
+        let results = []
+        
         if(!filter)
             results = await db.Course.findAll()
         else{
             results = await db.Course.findAll({ 
-                where: { 
-                    name: {
-                        [Op.like]: '%'+filter+'%'
-                    }
-                } 
+                where: fillFilter(filter, fields) 
             })
         }
-        /*
-        Post.findAll({
-            where: {
-                [Op.or]: [{authorId: 12}, {authorId: 13}]
-            }
-        });
-        */
-       console.log("dönecek results", results.toJSON())
-        return results
+
+        return {
+            courses: results
+        }
     } catch (err) {
-        console.log("hata\n", err)
         throw err
     }
 }

@@ -16,10 +16,10 @@ input StringOperator {
     eq: String
     ne: String
     in: [String]
-    nin: [String]
-    contains: String
-    starts_with: String
-    ends_with: String
+    notIn: [String]
+    substring: String
+    startsWith: String
+    endsWith: String
 }
 
 input NumericIntOperator {
@@ -52,7 +52,7 @@ input DateOperator {
     lte: Date
     ne: Date
     in: [Date]
-    nin: [Date]
+    notIn: [Date]
 }
 
 input DateTimeOperator {
@@ -71,12 +71,12 @@ input BooleanOperator {
     ne: Boolean
 }
 
-    enum SortingOperator {
-        ASC
-        DESC
-    }
+enum SortingOperator {
+    ASC
+    DESC
+}
 
-    input Paging {
-        offset: Int = 0
-        limit: Int
-    }
+input Paging {
+    offset: Int = 0
+    limit: Int
+}

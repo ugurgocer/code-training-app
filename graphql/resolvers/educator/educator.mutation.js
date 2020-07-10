@@ -1,8 +1,7 @@
 const db = require('./../../../model/index')
-const { ValidationError } = require('./../../../utils/errors/index')
+const { ValidationError, UniqueError } = require('./../../../utils/errors/index')
 const { parseError, imageUpload, loadFromDataLoader } = require('./../../../utils/helpers/other')
-const { regular } = require('./../../../utils/helpers/middleware')
-const { sequelize } = require('./../../../model/index')
+const { regular, educator } = require('./../../../utils/helpers/middleware')
 
 const educatorCreateBefore = (educator, req) => {
     regular(req)
@@ -17,6 +16,8 @@ const educatorCreateBefore = (educator, req) => {
             
             const result = await db.Educator.create({ ...educator, profilePicture: image_id, userId: req.account.id }, { transaction: trx })
 
+            await db.User.update({ isEducator: true }, { where: { id: req.account.id } })
+
             return {
                 ...result.toJSON(),
                 educatorId: result.id
@@ -26,6 +27,8 @@ const educatorCreateBefore = (educator, req) => {
             if(customErr){
                 if(customErr.type === 'validate')
                     throw new ValidationError(customErr.errors)
+                else if(customErr.type === 'unique')
+                    throw new UniqueError({ ...customErr.error, value: educator[customErr.error.field]})
             }else
                 throw err
         }
@@ -50,6 +53,8 @@ const educatorCreate = async (_, { educator }, { req, dataLoader }, info) => {
 }
 
 const educatorUpdate = async(_, { id, educator }, { req }, info) => {
+    educator(req)
+
     return db.sequelize.transaction(async trx => {
         try {
             await db.Educator.update({ ...educator }, { where: { id } } , { transaction: trx } )
@@ -69,6 +74,8 @@ const educatorUpdate = async(_, { id, educator }, { req }, info) => {
 }
 
 const educatorDelete = async(_, { id }, { req }, info) => {
+    educator(req)
+    
     return db.sequelize.transaction(async trx => {
         try {
             await db.Educator.destroy({ where: { id }}, {transaction: trx} )

@@ -23,10 +23,10 @@ Educator.init({
         },
     },
     description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true,
         validate: {
-            len: ['0', '500']
+            len: ['0', '1000']
         }
     },
     profilePicture: {
@@ -45,6 +45,7 @@ Educator.init({
     userId: {
         type: DataTypes.INTEGER,
         field: 'user_id',
+        unique: true,
         references: {
             model: UserModel,
             key: 'id'
