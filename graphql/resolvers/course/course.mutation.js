@@ -51,8 +51,10 @@ const courseUpdate = async(_, { id, course }, { req }, info) => {
 }
 
 const courseDelete = async(_, { id }, { req }, info) => {
+    educator(req)
+
     try {
-        await db.Course.destroy({ where: { id }})
+        await db.Course.destroy({ where: { id, educatorId: req.account.educator.id }})
 
         return {
             course_id: id

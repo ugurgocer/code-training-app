@@ -13,6 +13,9 @@ const courseRead = async(_, { seoLink }, { req }, info) => {
     try {
         const result = await db.Course.findOne({ where: { seoLink } })
 
+        if(!result)
+            return null
+            
         return {
             ...result.toJSON(),
             courseId: result.id

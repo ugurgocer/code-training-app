@@ -5,7 +5,7 @@ const { regular } = require('./../../../utils/helpers/middleware')
 const { Op } = require('sequelize')
 const { parseError } = require('./../../../utils/helpers/other')
 
-const register = async register => {
+const register = async (_, { register }, { req }, info)  => {
     return db.sequelize.transaction(async trx => {
         try{
             const user = await db.User.create(register, { transaction: trx })
@@ -30,8 +30,6 @@ const register = async register => {
                     throw new UniqueError({ ...customErr.error, value: register[customErr.error.field]})
             }else
                 throw err
-
-            throw errors
         }
     })
 }

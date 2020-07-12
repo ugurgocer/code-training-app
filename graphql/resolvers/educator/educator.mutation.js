@@ -17,6 +17,7 @@ const educatorCreate = (_, { educator }, { req, dataLoader }, info) => {
             const result = await db.Educator.create({ ...educator, profilePicture: image_id, userId: req.account.id }, { transaction: trx })
 
             await db.User.update({ isEducator: true }, { where: { id: req.account.id } })
+            await db.Token.update({ loginType: "educator" }, { where: { userId: req.account.id } })
 
             return {
                 ...result.toJSON(),
