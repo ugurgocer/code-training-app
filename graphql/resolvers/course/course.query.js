@@ -1,25 +1,28 @@
 const db = require('./../../../model/index')
 const { regular } = require('./../../../utils/helpers/middleware')
 const { fillFilter } = require('./../../../utils/helpers/queryArgs')
-const Sequelize = require('sequelize');
-
-const Op = Sequelize.Op;
 
 const fields = {
-    name: 'name'
+    title: 'title',
+    educatorId: 'educatorId',
+    description: 'description'
 }
 
-const courseRead = async(_, { _id }, { req }, info) => {
+const courseRead = async(_, { seoLink }, { req }, info) => {
     regular(req)
     try {
-        const result = await db.Course.findOne({ where: { _id } })
-        return result
+        const result = await db.Course.findOne({ where: { seoLink } })
+
+        return {
+            ...result.toJSON(),
+            courseId: result.id
+        }
     } catch (err) {
         throw err
     }
 }
 
-const courseList = async(_, { filter, sorting, paging }, { req }, info) => {
+const courseList = async(_, { filter, sorting, paging }, { req, dataLoader }, info) => {
     regular(req)
     try {
         let results = []

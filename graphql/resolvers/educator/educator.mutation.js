@@ -3,7 +3,7 @@ const { ValidationError, UniqueError } = require('./../../../utils/errors/index'
 const { parseError, imageUpload, loadFromDataLoader } = require('./../../../utils/helpers/other')
 const { regular, educator } = require('./../../../utils/helpers/middleware')
 
-const educatorCreateBefore = (educator, req) => {
+const educatorCreate = (_, { educator }, { req, dataLoader }, info) => {
     regular(req)
 
     return db.sequelize.transaction(async trx => {
@@ -33,23 +33,6 @@ const educatorCreateBefore = (educator, req) => {
                 throw err
         }
     })
-}
-
-const educatorCreate = async (_, { educator }, { req, dataLoader }, info) => {
-    try{
-        const result = await educatorCreateBefore(educator, req)
-    
-        const profilePicture = await loadFromDataLoader(dataLoader.image, result.profilePicture)
-
-        return {
-            ...result,
-            profilePicture
-        }
-    }catch(err){
-        throw err
-    }
-
-
 }
 
 const educatorUpdate = async(_, { id, educator }, { req }, info) => {

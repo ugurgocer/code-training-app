@@ -18,6 +18,15 @@ type Token {
     date: DateTime
     expiryDate: DateTime
     loginType: LoginType
+    userId: Int
+    user: User
+}
+
+type User {
+    fullName: String
+    username: String
+    email: String
+    isEducator: Boolean
 }
 
 type Mutation {
@@ -28,4 +37,5 @@ type Mutation {
 
 type Query {
     tokenRead: Token
+    meEducatorInfo: Educator
 }

@@ -16,8 +16,10 @@ const parseError = (err, lang="tr") => {
             errors
         }
     }else if(err.name === 'SequelizeUniqueConstraintError'){
+        const field = /\(([^\(\)]+)\)\=/g.exec(err.original.detail)[1].trim().split(', ')[0]
+
         let error = {
-            field: /\(([^\(\)]+)\)\=/g.exec(err.original.detail)[1].trim(),
+            field: field.split('"').join(''),
         }
 
         return {
@@ -36,19 +38,7 @@ const imageUpload = async (data, trx) => {
     }
 }
 
-const loadFromDataLoader = async (loader, keys ) => {
-    try{
-        const result = await loader.load(keys)
-
-        console.log(result)
-        return result
-    }catch(err){
-        throw new ImageUploadError(err.message)
-    }
-}
-
 module.exports = {
     parseError,
-    imageUpload,
-    loadFromDataLoader
+    imageUpload
 }

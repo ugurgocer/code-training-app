@@ -1,8 +1,10 @@
-#import SortingOperator, StringOperator from './generalUse.graphql'
+#import SortingOperator, StringOperator, NumericFloatOperator from './generalUse.graphql'
+#import Image, ImageInput from  './image.graphql'
+#import Date, DateTime from './scalars.graphql'
 
 type Query {
     courseList(filter: CourseFilterBase, sorting: CourseSorting): CourseList
-    courseRead (id: Int!): Course
+    courseRead (seoLink: String!): Course
 }
 
 type Mutation {
@@ -12,8 +14,15 @@ type Mutation {
 }
 
 type Course {
-    name: String
+    courseId: Int
+    title: String
     description: String
+    seoLink: String
+    image: Image
+    educatorId: Int
+    educator: Educator
+    createdAt: DateTime
+    updatedAt: DateTime
 }
 
 type CourseList {
@@ -21,13 +30,17 @@ type CourseList {
 }
 
 input CourseCreateInput {
-    name: String!
-    description: String
+    title: String!
+    description: String!
+    seoLink: String!
+    image: ImageInput
 }
 
 input CourseUpdateInput {
-    name: String
+    title: String
     description: String
+    seoLink: String
+    image: ImageInput
 }
 
 type CourseDeletePayload {
@@ -39,7 +52,9 @@ input CourseFilterBase {
 }
 
 input CourseFilter{
-    name: StringOperator
+    title: StringOperator
+    description: StringOperator
+    educatorId: NumericFloatOperator
     or: [CourseFilter]
     and: [CourseFilter]
 }
@@ -50,5 +65,9 @@ input CourseSorting {
 }
 
 enum CourseSortingField{
-    name
+    title
+    description
+    seoLink
+    createdAt
+    updatedAt
 }

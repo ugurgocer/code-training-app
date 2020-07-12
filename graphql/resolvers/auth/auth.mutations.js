@@ -5,7 +5,7 @@ const { regular } = require('./../../../utils/helpers/middleware')
 const { Op } = require('sequelize')
 const { parseError } = require('./../../../utils/helpers/other')
 
-const register = async ( _, { register }, { req }, info) => {
+const register = async register => {
     return db.sequelize.transaction(async trx => {
         try{
             const user = await db.User.create(register, { transaction: trx })

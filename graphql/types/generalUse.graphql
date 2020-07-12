@@ -41,7 +41,7 @@ input NumericFloatOperator {
     lte: Float
     ne: Float
     in: [Float]
-    nin: [Float]
+    notIn: [Float]
 }
 
 input DateOperator {

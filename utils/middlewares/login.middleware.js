@@ -18,6 +18,10 @@ module.exports = async ( req, res, next ) => {
                 
                 req.loginType = result.loginType
                 req.account = user.toJSON()
+                if(user.isEducator){
+                    const educator = await db.Educator.findOne({ where: { userId: result.userId }})
+                    req.account.educator = educator.toJSON()
+                }
                 next()
             }
         }

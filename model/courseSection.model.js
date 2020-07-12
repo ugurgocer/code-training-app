@@ -1,11 +1,11 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../lib/db.constructor')
 const EducatorModel = require('./educator.model')
-const ImageStorageModel = require('./imageStorage.model')
+const CourseModel = require('./course.model')
 
-class Course extends Model {}
+class CourseSection extends Model {}
 
-Course.init({
+CourseSection.init({
     title: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -21,14 +21,6 @@ Course.init({
             len: ['0', '1000']
         }
     },
-    seoLink: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-            notEmpty: true
-        }
-    },
     educatorId: {
         type: DataTypes.INTEGER,
         field: 'educator_id',
@@ -38,23 +30,23 @@ Course.init({
             key: 'id'
         }
     },
-    imageId: {
+    courseId: {
         type: DataTypes.INTEGER,
-        field: 'image_id',
+        field: 'course_id',
         references: {
-            model: ImageStorageModel,
+            model: CourseModel,
             key: 'id'
         }
     }
 }, {
-    modelName: 'courses',
+    modelName: 'course_sections',
     sequelize,
     indexes: [
         {
             unique: true,
-            fields: ['title', 'educator_id']
+            fields: ['title', 'course_id']
         }
     ]
 })
 
-module.exports = Course
+module.exports = CourseSection
