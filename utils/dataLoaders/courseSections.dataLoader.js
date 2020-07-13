@@ -5,7 +5,7 @@ const DataLoader = require('dataloader')
 module.exports = () => new DataLoader(keys => {
     return new Promise(async (res, rej) => {
         try{
-            const result = await db.User.findOne({ where: { id: { [Op.in]: keys } } })
+            const result = await db.CourseSection.findAll({ where: { courseId: { [Op.in]: keys } } })
 
             res([result])
         }catch(err){

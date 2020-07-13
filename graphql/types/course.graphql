@@ -14,13 +14,14 @@ type Mutation {
 }
 
 type Course {
-    courseId: Int
+    id: Int
     title: String
     description: String
     seoLink: String
     image: Image
     educatorId: Int
     educator: Educator
+    courseSections: [CourseSection]
     createdAt: DateTime
     updatedAt: DateTime
 }

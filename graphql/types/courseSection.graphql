@@ -6,12 +6,12 @@ type Query {
 
 type Mutation {
     courseSectionCreate(courseSection: CourseSectionCreateInput!, courseId: Int!): CourseSection
-    courseSectionUpdate(id: Int!, course: CourseSectionUpdateInput): CourseSection
-    courseSectionDelete(id: Int!): CourseDeletePayload
+    courseSectionUpdate(id: Int!, courseSection: CourseSectionUpdateInput): CourseSection
+    courseSectionDelete(id: Int!): CourseSectionDeletePayload
 }
 
 type CourseSection {
-    course_section_id: Int
+    id: Int
     title: String
     description: String
     createdAt: DateTime
@@ -32,6 +32,6 @@ input CourseSectionUpdateInput {
     description: String
 }
 
-type CourseDeletePayload {
+type CourseSectionDeletePayload {
     course_section_id: Int
 }

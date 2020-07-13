@@ -5,9 +5,9 @@ const DataLoader = require('dataloader')
 module.exports = user_id => new DataLoader(keys => {
     return new Promise(async (res, rej) => {
         try{
-            const result = await db.ImageStorage.findAll({ where: { id: { [Op.in]: keys } } })
+            const result = await db.ImageStorage.findOne({ where: { id: { [Op.in]: keys } } })
             
-            res(result)
+            res([result])
         }catch(err){
             rej(err)
         }

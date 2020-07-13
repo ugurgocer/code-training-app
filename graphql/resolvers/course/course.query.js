@@ -17,8 +17,7 @@ const courseRead = async(_, { seoLink }, { req }, info) => {
             return null
             
         return {
-            ...result.toJSON(),
-            courseId: result.id
+            ...result.toJSON()
         }
     } catch (err) {
         throw err
@@ -33,7 +32,7 @@ const courseList = async(_, { filter, sorting, paging }, { req, dataLoader }, in
         if(!filter)
             results = await db.Course.findAll()
         else{
-            results = await db.Course.findAll({ 
+            results = await db.Course.findAll({
                 where: fillFilter(filter, fields) 
             })
         }

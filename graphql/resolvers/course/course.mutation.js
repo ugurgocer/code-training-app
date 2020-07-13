@@ -37,6 +37,12 @@ const courseUpdate = async(_, { id, course }, { req }, info) => {
     educator(req)
 
     try {
+        if(course.image){
+            const image_id = await imageUpload({ userId: req.account.id, ...course.image})
+            delete course.image
+            course.imageId = image_id
+        }
+
         const result = await db.Course.update(course, { where: { id, educatorId: req.account.educator.id }, returning: true, plain: true})
 
         return result[1]
