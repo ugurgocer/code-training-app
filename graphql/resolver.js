@@ -5,6 +5,7 @@ const educator = require('./resolvers/educator/educator.index')
 const educatorProfession = require('./resolvers/educatorprofession/educatorprofession.index')
 const course = require('./resolvers/course/course.index')
 const courseSection = require('./resolvers/courseSection/courseSection.index')
+const courseStudents = require('./resolvers/courseStudents/courseStudents.index')
 const dataloader = require('./resolvers/dataLoader')
 
 module.exports = {
@@ -14,14 +15,16 @@ module.exports = {
         ...educatorProfession.Query,
         ...auth.Query,
         ...course.Query,
-        ...courseSection.Query
+        ...courseSection.Query,
+        ...courseStudents.Query
     },
     Mutation: {
         ...educator.Mutation,
         ...educatorProfession.Mutation,
         ...auth.Mutation,
         ...course.Mutation,
-        ...courseSection.Mutation
+        ...courseSection.Mutation,
+        ...courseStudents.Mutation
     },
     ...scalars,
     ...enums

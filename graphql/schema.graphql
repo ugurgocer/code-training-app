@@ -3,4 +3,5 @@
 #import Mutation, Query from './types/educatorProfession.graphql'
 #import Mutation, Query from './types/course.graphql'
 #import Mutation, Query from './types/courseSection.graphql'
+#import Mutation, Query from './types/courseStudents.graphql'
 #import Mutation, Query from './types/image.graphql'
