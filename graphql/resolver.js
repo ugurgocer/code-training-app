@@ -1,6 +1,7 @@
 const scalars = require('./resolvers/scalars')
 const enums = require('./resolvers/enums')
 const auth = require('./resolvers/auth/auth.index')
+const userDetail = require('./resolvers/user/userDetail/userDetail.index')
 const educator = require('./resolvers/educator/educator.index')
 const educatorProfession = require('./resolvers/educatorprofession/educatorprofession.index')
 const course = require('./resolvers/course/course.index')
@@ -10,6 +11,7 @@ const dataloader = require('./resolvers/dataLoader')
 module.exports = {
     ...dataloader,
     Query: {
+        ...userDetail.Query,
         ...educator.Query,
         ...educatorProfession.Query,
         ...auth.Query,
@@ -17,6 +19,7 @@ module.exports = {
         ...courseSection.Query
     },
     Mutation: {
+        ...educator.Mutation,
         ...educator.Mutation,
         ...educatorProfession.Mutation,
         ...auth.Mutation,

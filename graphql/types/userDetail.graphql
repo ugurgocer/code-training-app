@@ -1,0 +1,48 @@
+#import Image, ImageInput from  './image.graphql'
+
+type Query {
+    getUserDetail(user_id: Int!): UserDetail
+}
+
+type Mutation {
+    setUserDetail(user_id: Int!, user: UserInput, userDetail: UserDetailInput): UserDetail
+}
+
+type UserDetail {
+    fullName: String
+    userId: Int
+    profilePicture: Image
+    title: String
+    resume: String
+    website: String
+    twitter: String
+    facebook: String
+    linkedin: String
+    youtube: String
+}
+
+input UserDetailInput {
+    fullName: String
+    profilePicture: ImageInput
+    title: String
+    resume: String
+    website: String
+    twitter: String
+    facebook: String
+    linkedin: String
+    youtube: String
+}
+
+type User {
+    fullName: String
+    username: String
+    email: String
+    password: String
+}
+
+input UserInput {
+    fullName: String
+    username: String
+    email: String
+    password: String
+}
