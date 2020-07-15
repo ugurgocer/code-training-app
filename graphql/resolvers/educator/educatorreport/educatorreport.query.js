@@ -20,10 +20,14 @@ const educatorcourseReport = async(_, { educatorId }, { req, dataLoader }, info)
             coursesId.push(e.id)
         const totalStudent = await db.CourseStudents.count({ where: { courseId: { [Op.in]: coursesId } } })
 
+        //total document
+        const totalDocument = await db.Document.count({ where: { educatorId } })
+
         return {
             courses,
             totalCourse,
-            totalStudent
+            totalStudent,
+            totalDocument
         }
     } catch (err) {
         throw err
