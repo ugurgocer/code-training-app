@@ -6,6 +6,7 @@ type EducatorCourseReport {
     courses: [CourseDetail]
     totalCourse: Int
     totalStudent: Int
+    totalDocument: Int
 }
 
 type CourseDetail {
