@@ -30,10 +30,12 @@ const courseList = async(_, { filter, sorting, paging }, { req, dataLoader }, in
         let results = []
         
         if(!filter)
-            results = await db.Course.findAll()
+            results = await db.Course.findAll({ order: [['createdAt', 'DESC']] })
         else{
             results = await db.Course.findAll({
-                where: fillFilter(filter, fields) 
+                where: fillFilter(filter, fields),
+                order: [ ['createdAt', 'DESC'] ],
+                limit: paging.offset, offset: paging.limit
             })
         }
 
