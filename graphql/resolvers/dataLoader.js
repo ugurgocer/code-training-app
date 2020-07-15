@@ -12,6 +12,10 @@ module.exports = {
         courses: (result, _, { dataLoader }) => dataLoader.courses.load(result.courseId),
         user: (result, _, { dataLoader }) => dataLoader.user.load(result.userId)
     },
+    UserDetail: {
+        profilePicture: (result, _, { dataLoader }) => dataLoader.image.load(result.imageId),
+        user: (result, _, { dataLoader }) => dataLoader.user.load(result.userId)
+    },
     Educator: {
         profilePicture: (result, _, { dataLoader }) => dataLoader.image.load(result.profilePicture),
     },
@@ -21,7 +25,6 @@ module.exports = {
     Document: {
         codes: (result, _, { dataLoader }) => dataLoader.documentCode.load(result.id)
     },
-    
     CourseSection: {
         documents: (result, _, { dataLoader }) => dataLoader.document.load(result.id)
     }
