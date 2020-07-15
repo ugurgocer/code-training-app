@@ -1,8 +1,7 @@
 enum Language {
-    Python
-    Javascript
-    Html
-    PHP
+    PYTHON
+    JAVASCRIPT
+    XML
 }
 
 enum LoginType {

@@ -9,5 +9,12 @@ module.exports = {
     },
     Token: {
         user: (result, _, { dataLoader }) => dataLoader.user.load(result.userId),
+    },
+    Document: {
+        codes: (result, _, { dataLoader }) => dataLoader.documentCode.load(result.id)
+    },
+    
+    CourseSection: {
+        documents: (result, _, { dataLoader }) => dataLoader.document.load(result.id)
     }
 }

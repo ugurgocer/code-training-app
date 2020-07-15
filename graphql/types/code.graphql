@@ -1,9 +1,19 @@
-#import Language from './unions.graphql'
+#import Language from './enums.graphql'
+#import Date, DateTime from './scalars.graphql'
 
 type Code {
     code: String
-} 
+    language: Language
+    userId: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+}
+
+input CodeInput {
+    code: String
+    language: Language
+}
 
 type Query {
-    code: Code
+    codeRead(id: Int!): Code
 }

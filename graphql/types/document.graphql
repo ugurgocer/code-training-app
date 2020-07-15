@@ -1,0 +1,43 @@
+#import Language from './enums.graphql'
+#import Date, DateTime from './scalars.graphql'
+
+type Document {
+    id: Int
+    title: String
+    document: String
+    language: Language
+    educatorId: Int
+    sectionId: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+    codes: [Code]
+}
+
+input DocumentCreateInput {
+    document: String!
+    title: String!
+    language: Language!
+    codes: [CodeInput]
+}
+
+input DocumentUpdateInput {
+    document: String
+    title: String
+    language: Language
+    codes: [CodeInput]
+}
+
+type DocumentDeletePayload {
+    document_id: Int
+}
+
+type Query {
+    documentRead(id: Int!): Document
+    documentList(sectionId: Int!): [Document]
+}
+
+type Mutation {
+    documentCreate(sectionId: Int!, document: DocumentCreateInput!): Document
+    documentUpdate(id: Int!, documentObj: DocumentUpdateInput!): [Document]
+    documentDelete(id: Int!): DocumentDeletePayload
+}

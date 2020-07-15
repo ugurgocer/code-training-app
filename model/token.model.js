@@ -10,14 +10,6 @@ Token.init({
         allowNull: false,
         defaultValue: DataTypes.UUIDV4
     },
-    userId: {
-        type: DataTypes.INTEGER,
-        field: 'user_id',
-        references: {
-            model: UserModel,
-            key: 'id'
-        }
-    },
     expiryDate: {
         type: DataTypes.DATE,
         field: 'expiry_date',
@@ -33,6 +25,11 @@ Token.init({
 }, {
     modelName: 'tokens',
     sequelize
+})
+
+Token.belongsTo(UserModel, {
+    onDelete: 'cascade',
+    hooks: true
 })
 
 module.exports = Token

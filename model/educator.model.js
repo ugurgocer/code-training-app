@@ -41,19 +41,15 @@ Educator.init({
         type: DataTypes.DATE,
         allowNull: true,
         field: 'last_login_date'
-    },
-    userId: {
-        type: DataTypes.INTEGER,
-        field: 'user_id',
-        unique: true,
-        references: {
-            model: UserModel,
-            key: 'id'
-        }
-    },
+    }
 }, {
     modelName: 'educators',
     sequelize
+})
+
+Educator.belongsTo(UserModel, {
+    onDelete: 'cascade',
+    hooks: true
 })
 
 module.exports = Educator

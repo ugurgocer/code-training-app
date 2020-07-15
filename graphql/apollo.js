@@ -16,7 +16,9 @@ module.exports = async api => {
                 image: require('./../utils/dataLoaders/image.dataloader')(req.account ? req.account.id : null),
                 user: require('./../utils/dataLoaders/user.dataloader')(),
                 educator: require('./../utils/dataLoaders/educator.dataloader')(),
-                courseSections: require('./../utils/dataLoaders/courseSections.dataLoader')()
+                courseSections: require('./../utils/dataLoaders/courseSections.dataLoader')(),
+                documentCode: require('./../utils/dataLoaders/documentCodes.dataLoader')(),
+                document: require('./../utils/dataLoaders/document.dataLoader')(),
             }
         })
     })

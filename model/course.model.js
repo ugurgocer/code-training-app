@@ -29,15 +29,6 @@ Course.init({
             notEmpty: true
         }
     },
-    educatorId: {
-        type: DataTypes.INTEGER,
-        field: 'educator_id',
-        references: {
-            notEmpty: false,
-            model: EducatorModel,
-            key: 'id'
-        }
-    },
     imageId: {
         type: DataTypes.INTEGER,
         field: 'image_id',
@@ -52,9 +43,14 @@ Course.init({
     indexes: [
         {
             unique: true,
-            fields: ['title', 'educator_id']
+            fields: ['title', 'educatorId']
         }
     ]
+})
+
+Course.belongsTo(EducatorModel, {
+    onDelete: 'cascade',
+    hooks: true
 })
 
 module.exports = Course

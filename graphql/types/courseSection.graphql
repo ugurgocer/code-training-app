@@ -1,7 +1,7 @@
 #import Date, DateTime from './scalars.graphql'
 
 type Query {
-    courseSectionRead (courseId: Int!, id: Int!): Course
+    courseSectionRead (id: Int!): CourseSection
 }
 
 type Mutation {
@@ -16,6 +16,7 @@ type CourseSection {
     description: String
     createdAt: DateTime
     updatedAt: DateTime
+    documents: [Document]
 }
 
 type CourseSectionList {

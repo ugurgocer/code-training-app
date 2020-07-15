@@ -20,23 +20,6 @@ CourseSection.init({
             notEmpty: true,
             len: ['0', '1000']
         }
-    },
-    educatorId: {
-        type: DataTypes.INTEGER,
-        field: 'educator_id',
-        references: {
-            notEmpty: false,
-            model: EducatorModel,
-            key: 'id'
-        }
-    },
-    courseId: {
-        type: DataTypes.INTEGER,
-        field: 'course_id',
-        references: {
-            model: CourseModel,
-            key: 'id'
-        }
     }
 }, {
     modelName: 'course_sections',
@@ -44,9 +27,19 @@ CourseSection.init({
     indexes: [
         {
             unique: true,
-            fields: ['title', 'course_id']
+            fields: ['title', 'courseId']
         }
     ]
+})
+
+CourseSection.belongsTo(EducatorModel, {
+    onDelete: 'cascade',
+    hooks: true
+})
+
+CourseSection.belongsTo(CourseModel, {
+    onDelete: 'cascade',
+    hooks: true
 })
 
 module.exports = CourseSection

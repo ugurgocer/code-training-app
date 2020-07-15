@@ -1,33 +1,27 @@
-
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../lib/db.constructor')
-const UserModel = require('./user.model')
+const EducatorModel = require('./educator.model')
+const CourseSectionModel = require('./courseSection.model')
 
-class ImageStorage extends Model {}
+class Document extends Model {}
 
-ImageStorage.init({
-    response: {
-        type: DataTypes.TEXT,
+Document.init({
+    language: {
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            notEmpty: true
+            notEmpty: true,
+            isIn:  [['xml', 'javascript', 'python']]
         }
     },
-    status: {
+    title: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
             notEmpty: true
         }
     },
-    uid: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: true
-        }
-    },
-    url: {
+    document: {
         type: DataTypes.TEXT,
         allowNull: false,
         validate: {
@@ -35,13 +29,19 @@ ImageStorage.init({
         }
     }
 }, {
-    modelName: 'image_storage',
+    modelName: 'documents',
     sequelize
 })
 
-ImageStorage.belongsTo(UserModel, {
+Document.belongsTo(EducatorModel, {
     onDelete: 'cascade',
     hooks: true
 })
 
-module.exports = ImageStorage
+Document.belongsTo(CourseSectionModel, {
+    onDelete: 'cascade',
+    hooks: true,
+    as: 'section'
+})
+
+module.exports = Document
