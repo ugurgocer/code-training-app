@@ -16,12 +16,14 @@ const documentRead = async(_, { id }, { req }, info) => {
     }
 }
 
-const documentList = async(_, { sectionId }, { req, dataLoader }, info) => {
+const documentList = async(_, { sectionId, sorting, paging }, { req, dataLoader }, info) => {
     regular(req)
     try {
 
         const results = await db.Document.findAll({
-            where: sectionId
+            where: sectionId,
+            order: [[sorting ? sorting.field : 'createdAt', sorting ? sorting.type : 'DESC']],
+            limit: paging ? paging.limit : 50, offset: paging ? paging.offset : 0
         })
         
         return results
