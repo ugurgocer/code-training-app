@@ -34,13 +34,6 @@ input UserDetailInput {
     youtube: String
 }
 
-type User {
-    fullName: String
-    username: String
-    email: String
-    password: String
-}
-
 input UserInput {
     fullName: String
     username: String

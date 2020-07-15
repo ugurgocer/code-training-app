@@ -1,7 +1,7 @@
 const db = require('./../../../model/index')
 const { ValidationError, UniqueError } = require('./../../../utils/errors/index')
 const { parseError, imageUpload, loadFromDataLoader } = require('./../../../utils/helpers/other')
-const { regular, educator } = require('./../../../utils/helpers/middleware')
+const { regular, educator: educatorMiddleware } = require('./../../../utils/helpers/middleware')
 
 const educatorCreate = (_, { educator }, { req, dataLoader }, info) => {
     regular(req)
@@ -37,7 +37,7 @@ const educatorCreate = (_, { educator }, { req, dataLoader }, info) => {
 }
 
 const educatorUpdate = async(_, { id, educator }, { req }, info) => {
-    educator(req)
+    educatorMiddleware(req)
 
     return db.sequelize.transaction(async trx => {
         try {
