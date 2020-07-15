@@ -1,0 +1,23 @@
+type Query {
+    educatorcourseReport(educatorId: Int!): EducatorCourseReport
+}
+
+type EducatorCourseReport {
+    courses: [CourseDetail]
+    totalCourse: Int
+    totalStudent: Int
+}
+
+type CourseDetail {
+    id: Int
+    title: String
+    description: String
+    seoLink: String
+    image: Image
+    educatorId: Int
+    educator: Educator
+    courseSections: [CourseSection]
+    createdAt: DateTime
+    updatedAt: DateTime
+    totalStudent: Int
+}

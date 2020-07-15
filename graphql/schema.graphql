@@ -1,5 +1,6 @@
 #import Mutation, Query from './types/auth.graphql'
 #import Mutation, Query from './types/educator.graphql'
+#import Query from './types/Reports/educatorreport.graphql'
 #import Mutation, Query from './types/educatorProfession.graphql'
 #import Mutation, Query from './types/course.graphql'
 #import Mutation, Query from './types/courseSection.graphql'

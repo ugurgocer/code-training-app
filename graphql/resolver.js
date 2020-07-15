@@ -3,6 +3,7 @@ const enums = require('./resolvers/enums')
 const auth = require('./resolvers/auth/auth.index')
 const userDetail = require('./resolvers/user/userDetail/userDetail.index')
 const educator = require('./resolvers/educator/educator.index')
+const educatorreport = require('./resolvers/educator/educatorreport/educatorreport.index')
 const educatorProfession = require('./resolvers/educatorprofession/educatorprofession.index')
 const course = require('./resolvers/course/course.index')
 const courseSection = require('./resolvers/courseSection/courseSection.index')
@@ -15,6 +16,7 @@ module.exports = {
     Query: {
         ...userDetail.Query,
         ...educator.Query,
+        ...educatorreport.Query,
         ...educatorProfession.Query,
         ...auth.Query,
         ...course.Query,
