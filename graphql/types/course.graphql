@@ -1,4 +1,4 @@
-#import SortingOperator, StringOperator, NumericFloatOperator from './generalUse.graphql'
+#import SortingOperator, StringOperator, NumericFloatOperator, BooleanOperator from './generalUse.graphql'
 #import Image, ImageInput from  './image.graphql'
 #import Date, DateTime from './scalars.graphql'
 
@@ -18,6 +18,7 @@ type Course {
     title: String
     description: String
     seoLink: String
+    isPublished: Boolean
     image: Image
     educatorId: Int
     educator: Educator
@@ -34,6 +35,7 @@ input CourseCreateInput {
     title: String!
     description: String!
     seoLink: String!
+    isPublished: Boolean
     image: ImageInput
 }
 
@@ -41,6 +43,7 @@ input CourseUpdateInput {
     title: String
     description: String
     seoLink: String
+    isPublished: Boolean
     image: ImageInput
 }
 
@@ -55,6 +58,7 @@ input CourseFilterBase {
 input CourseFilter{
     title: StringOperator
     description: StringOperator
+    isPublished: BooleanOperator
     educatorId: NumericFloatOperator
     or: [CourseFilter]
     and: [CourseFilter]
