@@ -1,3 +1,4 @@
+#import SortingOperator from './generalUse.graphql'
 #import Language from './enums.graphql'
 #import Date, DateTime from './scalars.graphql'
 
@@ -31,9 +32,20 @@ type DocumentDeletePayload {
     document_id: Int
 }
 
+input DocumentSorting {
+    field: DocumentSortingField!
+    type: SortingOperator!
+}
+
+enum DocumentSortingField {
+    title
+    createdAt
+    updatedAt
+}
+
 type Query {
     documentRead(id: Int!): Document
-    documentList(sectionId: Int!): [Document]
+    documentList(sectionId: Int!, sorting: DocumentSorting, paging: Paging): [Document]
 }
 
 type Mutation {

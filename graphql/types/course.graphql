@@ -3,7 +3,7 @@
 #import Date, DateTime from './scalars.graphql'
 
 type Query {
-    courseList(filter: CourseFilterBase, sorting: CourseSorting): CourseList
+    courseList(filter: CourseFilterBase, sorting: CourseSorting, paging: Paging): CourseList
     courseRead (seoLink: String!): Course
 }
 
