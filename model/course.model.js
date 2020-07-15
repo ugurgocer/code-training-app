@@ -29,6 +29,10 @@ Course.init({
             notEmpty: true
         }
     },
+    isPublished: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
     imageId: {
         type: DataTypes.INTEGER,
         field: 'image_id',

@@ -5,7 +5,8 @@ const { fillFilter } = require('./../../../utils/helpers/queryArgs')
 const fields = {
     title: 'title',
     educatorId: 'educatorId',
-    description: 'description'
+    description: 'description',
+    isPublished: 'isPublished'
 }
 
 const courseRead = async(_, { seoLink }, { req }, info) => {
