@@ -4,6 +4,14 @@ module.exports = {
         educator: (result, _, { dataLoader }) => dataLoader.educator.load(result.educatorId),
         courseSections: (result, _, { dataLoader }) => dataLoader.courseSections.load(result.id)
     },
+    CourseStudent: {
+        course: (result, _, { dataLoader }) => dataLoader.course.load(result.courseId),
+        users: (result, _, { dataLoader }) => dataLoader.users.load(result.userId)
+    },
+    StudentCourse: {
+        courses: (result, _, { dataLoader }) => dataLoader.courses.load(result.courseId),
+        user: (result, _, { dataLoader }) => dataLoader.user.load(result.userId)
+    },
     Educator: {
         profilePicture: (result, _, { dataLoader }) => dataLoader.image.load(result.profilePicture),
     },

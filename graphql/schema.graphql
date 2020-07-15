@@ -6,3 +6,4 @@
 #import Mutation, Query from './types/image.graphql'
 #import Mutation, Query from './types/code.graphql'
 #import Mutation, Query from './types/document.graphql'
+#import Mutation, Query from './types/courseStudents.graphql'

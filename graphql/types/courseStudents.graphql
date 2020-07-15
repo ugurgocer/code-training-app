@@ -1,0 +1,31 @@
+
+type Query {
+    courseStudentList(courseId: Int!): CourseStudentsList
+    studentCourseList: StudentCoursesList
+}
+
+type Mutation {
+    courseStudentCreate(courseId: Int!): CourseStudent
+}
+
+type CourseStudent {
+    id: Int
+    courseId: Int
+    course: Course
+    users: [User]
+}
+
+type CourseStudentsList {
+    course_students: [CourseStudent]
+}
+
+type StudentCourse {
+    id: Int
+    userId: Int
+    courses: [Course]
+    user: User
+}
+
+type StudentCoursesList {
+    student_courses: [StudentCourse]
+}
