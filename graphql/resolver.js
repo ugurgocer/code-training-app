@@ -25,6 +25,7 @@ module.exports = {
         ...courseStudents.Query
     },
     Mutation: {
+        ...userDetail.Mutation,
         ...educator.Mutation,
         ...educator.Mutation,
         ...educatorProfession.Mutation,

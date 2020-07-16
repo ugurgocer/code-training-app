@@ -1,15 +1,18 @@
 #import Image, ImageInput from  './image.graphql'
 
 type Query {
-    getUserDetail(user_id: Int!): UserDetail
+    getUserDetail(userId: Int!): UserDetailPayload
 }
 
 type Mutation {
-    setUserDetail(user_id: Int!, user: UserInput, userDetail: UserDetailInput): UserDetail
+    setUserDetail(userId: Int!, user: UserDInput, userDetail: UserDetailInput): UserDetailPayload
+}
+
+type UserDetailPayload {
+    userDetail: UserDetail
 }
 
 type UserDetail {
-    fullName: String
     userId: Int
     profilePicture: Image
     title: String
@@ -23,7 +26,6 @@ type UserDetail {
 }
 
 input UserDetailInput {
-    fullName: String
     profilePicture: ImageInput
     title: String
     resume: String
@@ -34,7 +36,7 @@ input UserDetailInput {
     youtube: String
 }
 
-input UserInput {
+input UserDInput {
     fullName: String
     username: String
     email: String

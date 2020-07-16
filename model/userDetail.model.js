@@ -9,14 +9,6 @@ let { User } = require('./user.model')
 class UserDetail extends Model {}
 
 UserDetail.init({
-    fullName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        field: 'fullname',
-        validate: {
-            notEmpty: true
-        }
-    },
     imageId: {
         type: DataTypes.INTEGER,
         field: 'image_id',
