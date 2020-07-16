@@ -7,12 +7,11 @@ const getUserDetail = async(_, { userId }, { req }, info) => {
 
     try {
         const result = await db.UserDetail.findOne({ where: { userId } })
-
+        
         return {
             userDetail: result
         }
     } catch (err) {
-        console.log("hata\n")
         throw err
     }
 }

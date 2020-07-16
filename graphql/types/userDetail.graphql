@@ -1,7 +1,7 @@
 #import Image, ImageInput from  './image.graphql'
 
 type Query {
-    getUserDetail(userId: Int!): UserDetail
+    getUserDetail(userId: Int!): UserDetailPayload
 }
 
 type Mutation {
