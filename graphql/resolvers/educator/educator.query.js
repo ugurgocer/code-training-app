@@ -1,10 +1,10 @@
 const db = require('./../../../model/index')
 const { regular } = require('./../../../utils/helpers/middleware')
 
-const educatorRead = async(_, { id }, { req }, info) => {
+const educatorRead = async(_, { username }, { req }, info) => {
     regular(req)
     try {
-        const result = await db.Educator.findOne({ where: { id } })
+        const result = await db.Educator.findOne({ where: { username } })
         return result
     } catch (err) {
         throw err

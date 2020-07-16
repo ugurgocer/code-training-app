@@ -5,9 +5,14 @@ const DataLoader = require('dataloader')
 module.exports = () => new DataLoader(keys => {
     return new Promise(async (res, rej) => {
         try{
-            const result = await db.Educator.findOne({ where: { id: { [Op.in]: keys } } })
+            const result = await db.Educator.findAll({ where: { id: { [Op.in]: keys } } })
+            const resultArray = []
 
-            res([result])
+            keys.forEach(x => {
+                resultArray.push(result.length ? result.find(y => y.id === x) : [])
+            })
+
+            res(resultArray)
         }catch(err){
             rej(err)
         }

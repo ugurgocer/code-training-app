@@ -15,14 +15,13 @@ module.exports = async api => {
             dataLoader: {
                 image: require('./../utils/dataLoaders/image.dataloader')(req.account ? req.account.id : null),
                 user: require('./../utils/dataLoaders/user.dataloader')(),
-                users: require('./../utils/dataLoaders/users.dataloader')(),
                 educator: require('./../utils/dataLoaders/educator.dataloader')(),
                 documentCode: require('./../utils/dataLoaders/documentCodes.dataLoader')(),
                 document: require('./../utils/dataLoaders/document.dataLoader')(),
                 course: require('./../utils/dataLoaders/course.dataloader')(),
-                courses: require('./../utils/dataLoaders/courses.dataloader')(),
                 courseSections: require('./../utils/dataLoaders/courseSections.dataLoader')(),
-                courseStudents: require('./../utils/dataLoaders/courseStudents.dataLoader')()
+                courseStudents: require('./../utils/dataLoaders/courseStudents.dataLoader')(),
+                educatorCourse: require('./../utils/dataLoaders/educatorCourse.dataloader')(),
             }
         })
     })

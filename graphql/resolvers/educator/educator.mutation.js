@@ -39,22 +39,27 @@ const educatorCreate = (_, { educator }, { req, dataLoader }, info) => {
 const educatorUpdate = async(_, { id, educator }, { req }, info) => {
     educatorMiddleware(req)
 
-    return db.sequelize.transaction(async trx => {
-        try {
-            await db.Educator.update({ ...educator }, { where: { id } } , { transaction: trx } )
-            const result = await db.Educator.findOne({ where: { id } })
-            return result.toJSON()
-        } catch (err) {
-            const customErr = parseError(err)
-            if(customErr){
-                if(customErr.type === 'validate')
-                    throw new ValidationError(customErr.errors)
-            }else
-                throw err
+    try {
 
-            throw errors
+        if(educator.profilePicture){
+            let image_id = await imageUpload({userId: req.account.id, ...educator.profilePicture})
+            delete educator.profilePicture
+            educator.profilePicture = image_id
         }
-    })
+
+        await db.Educator.update({ ...educator }, { where: { id } })
+        const result = await db.Educator.findOne({ where: { id } })
+        return result.toJSON()
+    } catch (err) {
+        const customErr = parseError(err)
+        if(customErr){
+            if(customErr.type === 'validate')
+                throw new ValidationError(customErr.errors)
+        }else
+            throw err
+
+        throw errors
+    }
 }
 
 const educatorDelete = async(_, { id }, { req }, info) => {

@@ -3,7 +3,7 @@
 
 type Query {
     educatorList: EducatorList
-    educatorRead(id: Int!): Educator
+    educatorRead(username: String!): Educator
 }
 
 type Mutation {
@@ -13,11 +13,12 @@ type Mutation {
 }
 
 type Educator {
-    educatorId: Int
+    id: Int
     name: String
     username: String
     description: String
     profilePicture: Image
+    courses: [Course]
 }
 
 type EducatorList {

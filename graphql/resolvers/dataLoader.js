@@ -6,10 +6,10 @@ module.exports = {
     },
     CourseStudent: {
         course: (result, _, { dataLoader }) => dataLoader.course.load(result.courseId),
-        users: (result, _, { dataLoader }) => dataLoader.users.load(result.userId)
+        users: (result, _, { dataLoader }) => dataLoader.user.load(result.userId)
     },
     StudentCourse: {
-        courses: (result, _, { dataLoader }) => dataLoader.courses.load(result.courseId),
+        courses: (result, _, { dataLoader }) => dataLoader.course.load(result.courseId),
         user: (result, _, { dataLoader }) => dataLoader.user.load(result.userId)
     },
     UserDetail: {
@@ -18,6 +18,7 @@ module.exports = {
     },
     Educator: {
         profilePicture: (result, _, { dataLoader }) => dataLoader.image.load(result.profilePicture),
+        courses: (result, _, { dataLoader }) => dataLoader.educatorCourse.load(result.id)
     },
     Token: {
         user: (result, _, { dataLoader }) => dataLoader.user.load(result.userId),
