@@ -5,7 +5,7 @@ const { regular } = require('../../../../utils/helpers/middleware')
 
 const setUserDetail = async(_, { userId, user, userDetail }, { req, dataLoader }, info) => {
     regular(req)
-    console.log("geldi")
+
     return db.sequelize.transaction(async trx => {
         try {
             userDetail.userId = userId
@@ -21,13 +21,14 @@ const setUserDetail = async(_, { userId, user, userDetail }, { req, dataLoader }
                 await db.User.update({ ...user }, { where: { id: userId } }, {transaction: trx})
 
             const data = await db.UserDetail.findOne({ where: { userId } })
-
-            if(data)
-                db.UserDetail.update(userDetail, { where: { userId } }, {transaction: trx} )
+            let result
+            if(data){
+                await db.UserDetail.update({userDetail, imageId: image_id}, { where: {userId}, transaction: trx} )
+                result = await db.UserDetail.findOne({ where: { userId } })
+            }
             else
-                db.UserDetail.create({ userDetail }, { transaction: trx })
+                result = await db.UserDetail.create({ ...userDetail, imageId: image_id }, { transaction: trx })
 
-            const result = await db.UserDetail.findOne({ where: { userId } })
             return {
                 userDetail: result
             }
