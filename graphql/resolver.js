@@ -8,7 +8,6 @@ const educatorProfession = require('./resolvers/educatorprofession/educatorprofe
 const course = require('./resolvers/course/course.index')
 const courseSection = require('./resolvers/courseSection/courseSection.index')
 const document = require('./resolvers/document/document.index')
-const courseStudents = require('./resolvers/courseStudents/courseStudents.index')
 const dataloader = require('./resolvers/dataLoader')
 
 module.exports = {
@@ -21,8 +20,7 @@ module.exports = {
         ...auth.Query,
         ...course.Query,
         ...courseSection.Query,
-        ...document.Query,
-        ...courseStudents.Query
+        ...document.Query
     },
     Mutation: {
         ...userDetail.Mutation,
@@ -32,8 +30,7 @@ module.exports = {
         ...auth.Mutation,
         ...course.Mutation,
         ...courseSection.Mutation,
-        ...document.Mutation,
-        ...courseStudents.Mutation
+        ...document.Mutation
     },
     ...scalars,
     ...enums

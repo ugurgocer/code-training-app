@@ -12,6 +12,18 @@ type Document {
     createdAt: DateTime
     updatedAt: DateTime
     codes: [Code]
+    documentUser: DocumentUser
+}
+
+type DocumentUser {
+    isCompleted: Boolean
+    code: String
+    output: String
+}
+
+input DocumentUserInput {
+    code: String
+    output: String
 }
 
 input DocumentCreateInput {
@@ -52,4 +64,5 @@ type Mutation {
     documentCreate(sectionId: Int!, document: DocumentCreateInput!): Document
     documentUpdate(id: Int!, documentObj: DocumentUpdateInput!): [Document]
     documentDelete(id: Int!): DocumentDeletePayload
+    setDocumentUser(documentId: Int!, documentUser: DocumentUserInput): DocumentUser
 }

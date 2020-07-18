@@ -1,12 +1,29 @@
 const spawn = require('await-spawn')
+const fs =  require('fs')
 
 
-const nodeJS = async (res, file) => {
-    const bl = await spawn('node', ['-e', file])
+const nodeJS = async value => {
+    try{
+        const bl = await spawn('node', ['-e', value])
 
-    res.send(bl.toString())
+
+        return bl.toString()
+    }catch(err){
+        throw err.stderr.toString()
+    }
+}
+
+const python = async value => {
+    try{
+        const bl = await spawn('python', ['-c', value])
+
+        return bl.toString()
+    }catch(err){
+        throw err.stderr.toString()
+    }
 }
 
 module.exports = {
-    nodeJS
+    nodeJS,
+    python
 }

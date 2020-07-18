@@ -1,7 +1,7 @@
 const db = require('./../../../model/index')
 const { ValidationError, UniqueError } = require('./../../../utils/errors/index')
 const { parseError, loadFromDataLoader, imageUpload } = require('./../../../utils/helpers/other')
-const { educator } = require('./../../../utils/helpers/middleware')
+const { educator, regular } = require('./../../../utils/helpers/middleware')
 
 const documentCreate = async (_, { document, sectionId }, { req, dataLoader }, info)=> {
     educator(req)
@@ -80,8 +80,35 @@ const documentDelete = async(_, { id }, { req }, info) => {
     }
 }
 
+const setDocumentUser = async (_, { documentId, documentUser }, { req }, info) => {
+    regular(req)
+
+    try{
+
+        const isExist = await db.UserDocument.count({ where: {documentId, userId: req.account.id} })
+
+        let result = null
+
+        if(isExist){
+            result = await db.UserDocument.update(documentUser, { where: { documentId, userId: req.account.id }, returning: true, plain: true })[0]
+        }else{
+            result = await db.UserDocument.create({ ...documentUser, documentId, userId: req.account.id, isCompleted: true })
+        }
+
+        return result
+    }catch(err){
+        const customErr = parseError(err)
+        if(customErr){
+            if(customErr.type === 'validate')
+                throw new ValidationError(customErr.errors)
+        }else
+            throw err
+    }
+}
+
 module.exports = {
     documentCreate,
     documentUpdate,
-    documentDelete
+    documentDelete,
+    setDocumentUser
 }

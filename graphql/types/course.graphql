@@ -53,6 +53,7 @@ type CourseDeletePayload {
 
 input CourseFilterBase {
     and: [CourseFilter]
+    or: [CourseFilter]
 }
 
 input CourseFilter{

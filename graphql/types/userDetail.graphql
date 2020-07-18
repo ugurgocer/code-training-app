@@ -1,21 +1,16 @@
 #import Image, ImageInput from  './image.graphql'
 
 type Query {
-    getUserDetail(userId: Int!): UserDetailPayload
+    getUserDetail(userId: Int!): UserDetail
 }
 
 type Mutation {
-    setUserDetail(userId: Int!, user: UserDInput, userDetail: UserDetailInput): UserDetailPayload
-}
-
-type UserDetailPayload {
-    userDetail: UserDetail
+    setUserDetail(userId: Int!, user: UserDInput, userDetail: UserDetailInput): UserDetail
 }
 
 type UserDetail {
     userId: Int
     profilePicture: Image
-    title: String
     resume: String
     website: String
     twitter: String

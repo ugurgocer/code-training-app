@@ -17,7 +17,7 @@ input StringOperator {
     ne: String
     in: [String]
     notIn: [String]
-    substring: String
+    iLike: String
     startsWith: String
     endsWith: String
 }

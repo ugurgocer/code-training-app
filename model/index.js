@@ -4,7 +4,7 @@ const Educator = require('./educator.model')
 const EducatorProfession = require('./educatorProfession.model')
 const Course = require('./course.model')
 const CourseSection = require('./courseSection.model')
-const CourseStudents = require('./courseStudent.model')
+const UserDocument = require('./userDocument.model')
 const Token = require('./token.model')
 const ImageStorage = require('./imageStorage.model')
 const Code = require('./code.model')
@@ -23,6 +23,6 @@ module.exports = {
     CourseSection,
     Code,
     Document,
-    CourseStudents,
+    UserDocument,
     sequelize
 }

@@ -1,6 +1,7 @@
 const db = require('./../../../model/index')
 const { regular } = require('./../../../utils/helpers/middleware')
 const { fillFilter } = require('./../../../utils/helpers/queryArgs')
+const Op = require('sequelize').Op
 
 const fields = {
     title: 'title',

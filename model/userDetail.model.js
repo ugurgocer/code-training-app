@@ -1,10 +1,7 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('./../lib/db.constructor')
-const bcrypt = require('bcrypt')
 const UserModel = require('./user.model')
 const ImageStorageModel = require('./imageStorage.model')
-
-let { User } = require('./user.model') 
 
 class UserDetail extends Model {}
 
@@ -15,14 +12,6 @@ UserDetail.init({
         references: {
             model: ImageStorageModel,
             key: 'id'
-        }
-    },
-    title: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        field: 'title',
-        validate: {
-            notEmpty: false
         }
     },
     resume: {
