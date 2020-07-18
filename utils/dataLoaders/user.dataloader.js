@@ -12,6 +12,8 @@ module.exports = () => new DataLoader(keys => {
                 resultArray.push(result.length ? result.find(y => y.id === x) : [])
             })
 
+            console.log(resultArray)
+
             res(resultArray)
         }catch(err){
             rej(err)
