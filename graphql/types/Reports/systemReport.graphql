@@ -1,0 +1,9 @@
+type Query {
+    report: Report
+}
+
+type Report {
+    totalCourse: Int
+    totalDocument: Int
+    totalEducator: Int
+}

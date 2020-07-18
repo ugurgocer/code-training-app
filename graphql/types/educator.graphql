@@ -19,6 +19,7 @@ type Educator {
     description: String
     profilePicture: Image
     courses: [Course]
+    report: EducatorCourseReport
 }
 
 type EducatorList {

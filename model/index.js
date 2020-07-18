@@ -1,7 +1,6 @@
 const User = require('./user.model')
 const UserDetail = require('./userDetail.model')
 const Educator = require('./educator.model')
-const EducatorProfession = require('./educatorProfession.model')
 const Course = require('./course.model')
 const CourseSection = require('./courseSection.model')
 const UserDocument = require('./userDocument.model')
@@ -18,7 +17,6 @@ module.exports = {
     Token,
     ImageStorage,
     Educator,
-    EducatorProfession,
     Course,
     CourseSection,
     Code,

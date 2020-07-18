@@ -15,7 +15,7 @@ const educatorList = async(_, { filter, sorting, paging }, { req }, info) => {
     regular(req)
     try {
         const results = await db.Educator.findAll()
-        
+
         return {
             educators: results
         }

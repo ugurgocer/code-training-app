@@ -22,6 +22,7 @@ module.exports = async api => {
                 courseSections: require('./../utils/dataLoaders/courseSections.dataLoader')(),
                 userDocument: require('./../utils/dataLoaders/userDocument.dataLoader')(req.account ? req.account.id : null),
                 educatorCourse: require('./../utils/dataLoaders/educatorCourse.dataloader')(),
+                report: require('./../utils/dataLoaders/report.dataloader')(),
             }
         })
     })

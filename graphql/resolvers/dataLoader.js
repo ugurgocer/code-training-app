@@ -10,7 +10,8 @@ module.exports = {
     },
     Educator: {
         profilePicture: (result, _, { dataLoader }) => dataLoader.image.load(result.profilePicture),
-        courses: (result, _, { dataLoader }) => dataLoader.educatorCourse.load(result.id)
+        courses: (result, _, { dataLoader }) => dataLoader.educatorCourse.load(result.id),
+        report: (result, _, { dataLoader }) => dataLoader.report.load(result.id),
     },
     Token: {
         user: (result, _, { dataLoader }) => dataLoader.user.load(result.userId),

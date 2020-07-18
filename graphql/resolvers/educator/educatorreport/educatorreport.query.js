@@ -1,6 +1,5 @@
 const db = require('./../../../../model/index')
 const { regular } = require('./../../../../utils/helpers/middleware')
-const Op = require('sequelize').Op
 
 const educatorcourseReport = async(_, { educatorId }, { req, dataLoader }, info) => {
     regular(req)

@@ -44,8 +44,15 @@ const courseList = async(_, { filter, sorting, paging }, { req, dataLoader }, in
             })
         }
 
+        let totalCount = 0
+        if(results.length){
+            totalCount = await db.Course.count({
+                where: fillFilter(filter, fields)
+            })
+        }
         return {
-            courses: results
+            courses: results,
+            totalCount
         }
     } catch (err) {
         throw err
