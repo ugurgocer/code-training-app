@@ -5,17 +5,19 @@ const Op = require('sequelize').Op
 const DataLoader = require('dataloader')
 
 module.exports = () => new DataLoader(keys => {
+    console.log(keys)
     return new Promise(async (res, rej) => {
         try{
-            const totalCourse = await db.Course.count({ where: { educatorId: { [Op.in]: keys }, isPublished: true} })
+            let result = []
 
-            //total document
-            const totalDocument = await db.Document.count({ where: { educatorId: { [Op.in]: keys }} })
+            for (var i in keys){
+                result.push({
+                    totalCourse: await db.Course.count({ where: { educatorId: i, isPublished: true} }),
+                    totalDocument: await db.Document.count({ where: { educatorId: i} })
+                })
+            }
             
-            res([{
-                totalCourse,
-                totalDocument
-            }])
+            res(result)
         }catch(err){
             rej(err)
         }

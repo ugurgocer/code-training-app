@@ -7,7 +7,6 @@ const getUserDetail = async(_, { userId }, { req }, info) => {
     try {
         const result = await db.UserDetail.findOne({ where: { userId } })
         
-        console.log(userId)
         if(result)
             return {
                 ...result.toJSON(),
