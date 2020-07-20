@@ -3,9 +3,7 @@ type Query {
 }
 
 type EducatorCourseReport {
-    courses: [CourseDetail]
     totalCourse: Int
-    totalStudent: Int
     totalDocument: Int
 }
 
