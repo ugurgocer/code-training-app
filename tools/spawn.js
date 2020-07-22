@@ -1,11 +1,8 @@
 const spawn = require('await-spawn')
-const fs =  require('fs')
-
-
+const { spawn: sp } = require('child_process')
 const nodeJS = async value => {
     try{
         const bl = await spawn('node', ['-e', value])
-
 
         return bl.toString()
     }catch(err){

@@ -8,7 +8,7 @@ module.exports = {
         username: "Kullanıcı adı",
         email: "E-Posta",
         password: "Parola",
-        fullName: "Tam Ad",
+        fullName: "Ad Soyad",
         isEducator: "Eğitmen mi",
         loginType: "Giriş tipi"
     },

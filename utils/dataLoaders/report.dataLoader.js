@@ -12,8 +12,8 @@ module.exports = () => new DataLoader(keys => {
 
             for (var i in keys){
                 result.push({
-                    totalCourse: await db.Course.count({ where: { educatorId: i, isPublished: true} }),
-                    totalDocument: await db.Document.count({ where: { educatorId: i} })
+                    totalCourse: await db.Course.count({ where: { educatorId: keys[i], isPublished: true} }),
+                    totalDocument: await db.Document.count({ where: { educatorId: keys[i]} })
                 })
             }
             

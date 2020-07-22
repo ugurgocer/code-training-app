@@ -7,7 +7,7 @@ module.exports = {
         username: "username",
         email: "email",
         password: "password",
-        fullName: "full name",
+        fullName: "name surname",
         isEducator: "Is educator",
         loginType: "login type"
     },
