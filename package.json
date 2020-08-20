@@ -12,7 +12,7 @@
     "@hapi/joi": "^17.1.0",
     "apollo-server-express": "^2.15.1",
     "await-spawn": "^3.0.0",
-    "bcrypt": "^3.0.8",
+    "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "dataloader": "^2.0.0",
     "ejs": "^3.1.3",
